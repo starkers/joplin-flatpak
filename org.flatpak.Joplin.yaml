@@ -1,0 +1,30 @@
+app-id: org.flatpak.Joplin
+# command: hello.sh
+command: run.sh
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=host
+  - --filesystem=home
+  - --talk-name=org.kde.StatusNotifierWatcher
+modules:
+- build-commands:
+  - ./build.sh
+  buildsystem: simple
+  name: hello
+  sources:
+  - path: org.flatpak.Joplin.desktop
+    type: file
+  - path: build.sh
+    type: file
+  - path: run.sh
+    type: file
+  - url:  https://github.com/laurent22/joplin/releases/download/v1.0.201/Joplin-1.0.201.AppImage
+    type: file
+    sha256: a5b085b65e54769d3c70342db773a3763c8e5e804e7a4cf5dba96c5dd59b0d18
+runtime: org.freedesktop.Platform
+runtime-version: '19.08'
+sdk: org.freedesktop.Sdk

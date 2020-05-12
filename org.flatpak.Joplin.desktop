@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Joplin
+Exec=run.sh
+Terminal=false
+Type=Application
+Icon=org.flatpak.Joplin
+StartupWMClass=Joplin
+Comment=Joplin for Desktop
+Categories=Office;

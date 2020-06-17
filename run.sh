@@ -1,2 +1,4 @@
 #!/usr/bin/env sh
-joplin --no-sandbox $@
+
+set -e
+exec env TMPDIR=$XDG_CACHE_HOME zypak-wrapper joplin "$@"

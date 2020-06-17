@@ -33,7 +33,7 @@ I assume you've already setup the flathub repo..
 
 you may also need to install the Sdk:
 
-`flatpak install flathub org.freedesktop.Platform//19.08 org.freedesktop.Sdk//19.08`
+`flatpak install flathub org.freedesktop.Platform//19.08 org.freedesktop.Sdk//19.08 org.electronjs.Electron2.BaseApp//19.08`
 
 for help, please read the flatpak docs/some tutorials..
 

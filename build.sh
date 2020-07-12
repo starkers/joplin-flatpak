@@ -4,7 +4,7 @@ APPID=org.flatpak.Joplin
 
 set -e
 
-file="Joplin-1.0.201.AppImage"
+file="Joplin-1.0.227.AppImage"
 
 chmod +x "${file}"
 

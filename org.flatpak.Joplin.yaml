@@ -22,9 +22,9 @@ modules:
     type: file
   - path: run.sh
     type: file
-  - url:  https://github.com/laurent22/joplin/releases/download/v1.0.201/Joplin-1.0.201.AppImage
+  - url: https://github.com/laurent22/joplin/releases/download/v1.0.227/Joplin-1.0.227.AppImage
     type: file
-    sha256: a5b085b65e54769d3c70342db773a3763c8e5e804e7a4cf5dba96c5dd59b0d18
+    sha512: 2d83b8bcbdca7f061774e785dbd408e21fc0bf798691319ca2a809d65edb4d2e29de44c0d95d126bf438ce85ad6eeb582ef70dbb89c550fc994a5e6788477204
 runtime: org.freedesktop.Platform
 runtime-version: '19.08'
 sdk: org.freedesktop.Sdk

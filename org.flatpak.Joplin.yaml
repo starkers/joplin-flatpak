@@ -1,32 +1,43 @@
 app-id: org.flatpak.Joplin
-# command: hello.sh
-command: run.sh
-finish-args:
-  - --share=ipc
-  - --socket=wayland
-  - --socket=x11
-  - --socket=pulseaudio
-  - --share=network
-  - --filesystem=host
-  - --filesystem=home
-  - --talk-name=org.kde.StatusNotifierWatcher
-modules:
-- build-commands:
-  - ./build.sh
-  buildsystem: simple
-  name: hello
-  sources:
-  - path: org.flatpak.Joplin.desktop
-    type: file
-  - path: build.sh
-    type: file
-  - path: run.sh
-    type: file
-  - url:  https://github.com/laurent22/joplin/releases/download/v1.0.201/Joplin-1.0.201.AppImage
-    type: file
-    sha256: a5b085b65e54769d3c70342db773a3763c8e5e804e7a4cf5dba96c5dd59b0d18
+
 runtime: org.freedesktop.Platform
 runtime-version: '19.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '19.08'
+
+rename-icon: joplin
+rename-desktop-file: Joplin.desktop
+
+command: run.sh
+finish-args:
+  - --socket=fallback-x11
+  - --device=dri
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-pictures:ro
+  - --talk-name=org.kde.StatusNotifierWatcher
+modules:
+  - name: joplin-appimage
+    buildsystem: simple
+    build-commands:
+      - |
+        chmod +x Joplin.AppImage
+        ./Joplin.AppImage --appimage-extract
+        mkdir -p ${FLATPAK_DEST}/bin
+        mkdir -p ${FLATPAK_DEST}/share/icons/hicolor/
+        mkdir -p ${FLATPAK_DEST}/share/applications
+        mv -v squashfs-root/usr/share/icons/hicolor/* ${FLATPAK_DEST}/share/icons/hicolor/
+        cp -rav squashfs-root/* ${FLATPAK_DEST}/bin/
+        install -Dm755 run.sh ${FLATPAK_DEST}/bin/run.sh
+        install -Dm644 Joplin.desktop ${FLATPAK_DEST}/share/applications/Joplin.desktop
+    sources:
+      - type: file
+        path: Joplin.desktop
+      - type: file
+        path: run.sh
+      - type: file
+        dest-filename: Joplin.AppImage
+        url: https://github.com/laurent22/joplin/releases/download/v1.0.233/Joplin-1.0.233.AppImage
+        sha512: b23c19dab4b49cada945c6a3cc3c2b9ee036a73657f107420d615a8dfe59b5f32e2a45d6efc9f4729f23db9ca30e468e933bc7793835e78d74fad89ef64ec361
